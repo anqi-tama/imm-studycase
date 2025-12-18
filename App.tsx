@@ -112,13 +112,13 @@ const App: React.FC = () => {
             </div>
           </div>
           <div className="hidden print:block text-right">
-             <div className="font-black text-4xl text-[#0f172a]">IMM</div>
-             <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none">Intelligence Media Monitoring</div>
+             <div className="font-black text-3xl text-[#0f172a]">IMM</div>
+             <div className="text-[8px] font-bold text-gray-400 uppercase tracking-widest leading-none">Intelligence Media Monitoring</div>
           </div>
         </header>
 
         <div className="space-y-16 print:space-y-0">
-          {/* Halaman 1 */}
+          {/* Halaman 1: Judul + Section 1 */}
           <section id="summary" className="scroll-mt-20">
             <div className={`mb-6 border-b-2 pb-2 flex items-center justify-between ${currentCase === 'wardah' ? 'border-teal-600' : 'border-indigo-600'}`}>
                <h3 className={`text-2xl font-bold ${currentCase === 'wardah' ? 'text-teal-800' : 'text-indigo-800'}`}>
@@ -129,8 +129,8 @@ const App: React.FC = () => {
             <SummaryTab data={currentData} />
           </section>
           
-          {/* Halaman 2 */}
-          <section id="viral-dive" className="scroll-mt-20 pt-8">
+          {/* Halaman 2: Section 2 */}
+          <section id="viral-dive" className="scroll-mt-20 pt-8 print:pt-4">
             <div className={`mb-6 border-b-2 pb-2 flex items-center justify-between ${currentCase === 'wardah' ? 'border-teal-600' : 'border-indigo-600'}`}>
                <h3 className={`text-2xl font-bold ${currentCase === 'wardah' ? 'text-teal-800' : 'text-indigo-800'}`}>
                  2. Viral Analytics Deep Dive
@@ -140,8 +140,8 @@ const App: React.FC = () => {
             <ViralDiveTab data={currentData} />
           </section>
           
-          {/* Halaman 3 */}
-          <section id="content-detail" className="scroll-mt-20 pt-8">
+          {/* Halaman 3: Section 3 */}
+          <section id="content-detail" className="scroll-mt-20 pt-8 print:pt-4">
             <div className={`mb-6 border-b-2 pb-2 flex items-center justify-between ${currentCase === 'wardah' ? 'border-teal-600' : 'border-indigo-600'}`}>
                <h3 className={`text-2xl font-bold ${currentCase === 'wardah' ? 'text-teal-800' : 'text-indigo-800'}`}>
                  3. Content & UGC Insights
