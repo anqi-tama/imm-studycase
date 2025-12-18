@@ -6,12 +6,12 @@ import {
   LayoutDashboard, 
   Download
 } from 'lucide-react';
-import { TabId, CaseStudy, CaseStudyData } from './types';
-import SummaryTab from './components/SummaryTab';
-import ViralDiveTab from './components/ViralDiveTab';
-import ContentDetailTab from './components/ContentDetailTab';
-import { WARDAH_DATA } from './data/wardah';
-import { UGM_DATA } from './data/ugm';
+import { TabId, CaseStudy, CaseStudyData } from './types.ts';
+import SummaryTab from './components/SummaryTab.tsx';
+import ViralDiveTab from './components/ViralDiveTab.tsx';
+import ContentDetailTab from './components/ContentDetailTab.tsx';
+import { WARDAH_DATA } from './data/wardah.ts';
+import { UGM_DATA } from './data/ugm.ts';
 
 const SimpleIMMLogo = () => (
   <div className="relative w-10 h-10 flex items-center justify-center">
@@ -27,7 +27,6 @@ const App: React.FC = () => {
   const currentData: CaseStudyData = currentCase === 'wardah' ? WARDAH_DATA : UGM_DATA;
 
   const handleDownloadPdf = () => {
-    // Memastikan browser siap mencetak dalam mode desktop
     window.print();
   };
 
@@ -68,7 +67,6 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#f7f9fb]">
-      {/* Top Header */}
       <nav className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm no-print">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
@@ -96,12 +94,10 @@ const App: React.FC = () => {
                 </button>
               </div>
             </div>
-            {/* AI Analyst button removed as requested */}
           </div>
         </div>
       </nav>
 
-      {/* Main Content Area */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-32 print:max-w-none print:w-full">
         <header className="mb-8 border-b border-gray-200 pb-6 flex justify-between items-end">
           <div>
@@ -122,7 +118,6 @@ const App: React.FC = () => {
         </header>
 
         <div className="space-y-16">
-          {/* Section 1: Summary */}
           <section id="summary" className="scroll-mt-20 break-inside-avoid">
             <div className={`mb-6 border-b-2 pb-2 flex items-center justify-between ${currentCase === 'wardah' ? 'border-teal-600' : 'border-indigo-600'}`}>
                <h3 className={`text-2xl font-bold ${currentCase === 'wardah' ? 'text-teal-800' : 'text-indigo-800'}`}>
@@ -133,7 +128,6 @@ const App: React.FC = () => {
             <SummaryTab data={currentData} />
           </section>
           
-          {/* Section 2: Viral Dive */}
           <section id="viral-dive" className="scroll-mt-20 pt-8 break-inside-avoid">
             <div className={`mb-6 border-b-2 pb-2 flex items-center justify-between ${currentCase === 'wardah' ? 'border-teal-600' : 'border-indigo-600'}`}>
                <h3 className={`text-2xl font-bold ${currentCase === 'wardah' ? 'text-teal-800' : 'text-indigo-800'}`}>
@@ -144,7 +138,6 @@ const App: React.FC = () => {
             <ViralDiveTab data={currentData} />
           </section>
           
-          {/* Section 3: Content Detail */}
           <section id="content-detail" className="scroll-mt-20 pt-8 break-inside-avoid">
             <div className={`mb-6 border-b-2 pb-2 flex items-center justify-between ${currentCase === 'wardah' ? 'border-teal-600' : 'border-indigo-600'}`}>
                <h3 className={`text-2xl font-bold ${currentCase === 'wardah' ? 'text-teal-800' : 'text-indigo-800'}`}>
@@ -157,7 +150,6 @@ const App: React.FC = () => {
         </div>
       </main>
 
-      {/* Bottom Navigation Bar */}
       <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 no-print w-full max-w-2xl px-4">
         <div className="bg-white/90 backdrop-blur-xl border border-gray-200/50 shadow-[0_20px_50px_rgba(0,0,0,0.1)] rounded-2xl p-2 flex items-center justify-between">
           <div className="flex space-x-1 flex-1">

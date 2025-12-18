@@ -4,7 +4,7 @@ import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   PieChart, Pie, Cell, BarChart, Bar, Legend
 } from 'recharts';
-import { CaseStudyData } from '../types';
+import { CaseStudyData } from '../types.ts';
 
 interface ViralDiveTabProps {
   data: CaseStudyData;
@@ -16,7 +16,6 @@ const ViralDiveTab: React.FC<ViralDiveTabProps> = ({ data }) => {
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Timeline Chart */}
         <div className="lg:col-span-2 bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
           <h3 className="text-lg font-bold text-gray-900 mb-6">{isWardah ? 'November' : 'Nov 2025'} Virality Waves</h3>
           <div className="h-[350px]">
@@ -46,7 +45,6 @@ const ViralDiveTab: React.FC<ViralDiveTabProps> = ({ data }) => {
           </div>
         </div>
 
-        {/* Share of Voice */}
         <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
           <h3 className="text-lg font-bold text-gray-900 mb-6 text-center">Platform Share of Voice</h3>
           <div className="h-[300px]">
@@ -80,7 +78,6 @@ const ViralDiveTab: React.FC<ViralDiveTabProps> = ({ data }) => {
         </div>
       </div>
 
-      {/* Breakdown Table */}
       <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
         <div className={`px-6 py-4 border-b border-gray-50 flex items-center justify-between ${isWardah ? 'bg-teal-50/20' : 'bg-indigo-50/20'}`}>
           <h3 className="text-lg font-bold text-gray-900">Engagement Breakdown by Platform</h3>
@@ -107,48 +104,6 @@ const ViralDiveTab: React.FC<ViralDiveTabProps> = ({ data }) => {
               ))}
             </tbody>
           </table>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
-          <h3 className="text-lg font-bold text-gray-900 mb-6">Engagement Focus (Mentions)</h3>
-          <div className="h-[300px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <PieChart>
-                <Pie
-                  data={isWardah ? [
-                    { name: 'Brand Loyalty', value: 55, fill: '#0d9488' },
-                    { name: 'Product Conversion', value: 45, fill: '#fbbf24' }
-                  ] : [
-                    { name: 'Positive/Alumni Defense', value: 69, fill: '#10b981' },
-                    { name: 'Controversy/Negative', value: 31, fill: '#ef4444' }
-                  ]}
-                  innerRadius={0}
-                  outerRadius={100}
-                  dataKey="value"
-                  label
-                />
-                <Tooltip />
-                <Legend verticalAlign="bottom" height={36}/>
-              </PieChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
-
-        <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
-          <h3 className="text-lg font-bold text-gray-900 mb-6">Top Hashtag Performance</h3>
-          <div className="h-[300px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={data.hashtags} layout="vertical">
-                <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#f1f5f9" />
-                <XAxis type="number" hide />
-                <YAxis dataKey="tag" type="category" axisLine={false} tickLine={false} tick={{fontSize: 10, fontWeight: 600}} width={140} />
-                <Tooltip cursor={{fill: 'transparent'}} />
-                <Bar dataKey="count" fill={isWardah ? "#0d9488" : "#6366f1"} radius={[0, 4, 4, 0]} barSize={16} />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
         </div>
       </div>
     </div>

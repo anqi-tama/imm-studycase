@@ -5,11 +5,9 @@ import {
   Globe,
   Share2,
   ExternalLink,
-  ThumbsUp,
-  MessageCircle,
   TrendingUp
 } from 'lucide-react';
-import { CaseStudyData } from '../types';
+import { CaseStudyData } from '../types.ts';
 
 interface ContentDetailTabProps {
   data: CaseStudyData;
@@ -24,7 +22,6 @@ const ContentDetailTab: React.FC<ContentDetailTabProps> = ({ data }) => {
       <h3 className="text-2xl font-bold text-gray-900">UGC & Viral Performance Detail</h3>
       
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Positive Sentiment Drivers */}
         <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
           <h4 className="text-lg font-bold text-gray-800 mb-6 flex items-center">
             <Sparkles className={`mr-2 ${isWardah ? 'text-teal-600' : 'text-indigo-600'}`} size={20} />
@@ -42,7 +39,6 @@ const ContentDetailTab: React.FC<ContentDetailTabProps> = ({ data }) => {
           </div>
         </div>
 
-        {/* Viral Content 1 */}
         <div className={`bg-white p-6 rounded-2xl border-2 shadow-sm ${isWardah ? 'border-pink-100' : 'border-red-100'}`}>
           <div className="flex items-center justify-between mb-4">
             <h4 className="text-lg font-bold text-gray-800 flex items-center">
@@ -70,7 +66,6 @@ const ContentDetailTab: React.FC<ContentDetailTabProps> = ({ data }) => {
           </ul>
         </div>
 
-        {/* Viral Content 2 */}
         <div className={`bg-white p-6 rounded-2xl border-2 shadow-sm ${isWardah ? 'border-indigo-100' : 'border-teal-100'}`}>
           <div className="flex items-center justify-between mb-4">
             <h4 className="text-lg font-bold text-gray-800 flex items-center">
@@ -96,61 +91,6 @@ const ContentDetailTab: React.FC<ContentDetailTabProps> = ({ data }) => {
               </li>
             ))}
           </ul>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* X/Platform Deep Dive */}
-        <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
-          <h4 className="text-lg font-bold text-gray-800 mb-6 flex items-center">
-            <Share2 className={`mr-2 ${isWardah ? 'text-gray-900' : 'text-blue-600'}`} size={20} />
-            {detail.platformDeepDive.title}
-          </h4>
-          <div className="space-y-4">
-            {detail.platformDeepDive.items.map((item, i) => (
-              <div key={i} className={`p-3 border-l-4 rounded-r-xl ${isWardah ? 'border-gray-900 bg-gray-50' : 'border-blue-600 bg-blue-50'}`}>
-                <p className={`text-xs font-bold mb-1 ${isWardah ? 'text-gray-900' : 'text-blue-900'}`}>{item.label}</p>
-                <p className="text-[10px] text-gray-500 italic leading-tight">"{item.text}"</p>
-              </div>
-            ))}
-            <div className="pt-2">
-              <p className="text-[10px] text-gray-400 font-bold uppercase mb-2">{detail.platformDeepDive.metricLabel}</p>
-              <div className="flex items-center">
-                <div className="flex-1 bg-gray-100 h-2 rounded-full overflow-hidden">
-                  <div className={`${isWardah ? 'bg-gray-900' : 'bg-blue-600'} h-full`} style={{ width: detail.platformDeepDive.metricPercent }}></div>
-                </div>
-                <span className="ml-3 text-xs font-black">{detail.platformDeepDive.metricPercent} Share</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Web Articles */}
-        <div className={`lg:col-span-2 bg-white p-6 rounded-2xl border shadow-sm relative overflow-hidden ${isWardah ? 'border-teal-100' : 'border-indigo-100'}`}>
-          <div className="absolute top-0 right-0 p-8 opacity-5">
-            <Globe size={120} className={isWardah ? 'text-teal-900' : 'text-indigo-900'} />
-          </div>
-          <h4 className="text-lg font-bold text-gray-800 mb-6 flex items-center relative z-10">
-            <Globe className={`mr-2 ${isWardah ? 'text-teal-600' : 'text-indigo-600'}`} size={20} />
-            Top Earned Media & Web Articles
-          </h4>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
-            {detail.articles.map((art, idx) => (
-              <div key={idx} className={`group p-4 rounded-xl border border-gray-100 bg-white shadow-sm transition-all hover:shadow-md ${isWardah ? 'hover:border-teal-200' : 'hover:border-indigo-200'}`}>
-                <div className="flex items-center justify-between mb-2">
-                  <span className={`text-[10px] font-black px-2 py-0.5 rounded uppercase ${isWardah ? 'text-teal-600 bg-teal-50' : 'text-indigo-600 bg-indigo-50'}`}>
-                    {art.source}
-                  </span>
-                  <ExternalLink size={12} className="text-gray-300 group-hover:text-gray-500" />
-                </div>
-                <p className="text-sm font-bold text-gray-900 mb-1 leading-tight">{art.title}</p>
-                <div className="flex items-center justify-between mt-3 text-[10px] text-gray-400">
-                  <div className="flex items-center"><TrendingUp size={10} className="mr-1" /> {art.views} Views</div>
-                  <div className="font-bold text-gray-600">{art.impact}</div>
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </div>

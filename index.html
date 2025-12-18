@@ -17,12 +17,12 @@
         /* Desktop Optimization for PDF Export */
         @media print {
             @page {
-                size: A4 landscape; /* Landscape biasanya lebih baik untuk dashboard lebar */
+                size: A4 landscape;
                 margin: 10mm;
             }
 
             html, body {
-                width: 1280px !important; /* Paksa lebar desktop */
+                width: 1280px !important;
                 height: auto !important;
                 background-color: white !important;
                 -webkit-print-color-adjust: exact !important;
@@ -38,18 +38,15 @@
                 display: none !important;
             }
 
-            /* Paksa grid Tailwind untuk tetap berfungsi di print */
             .grid {
                 display: grid !important;
             }
 
-            /* Hindari pemotongan di tengah elemen */
             section, .bg-white, .rounded-xl, .recharts-responsive-container {
                 page-break-inside: avoid !important;
                 break-inside: avoid !important;
             }
 
-            /* Header Section Spacing */
             section {
                 padding-top: 2rem !important;
                 margin-bottom: 3rem !important;
@@ -60,17 +57,14 @@
                 margin-bottom: 2rem !important;
             }
 
-            /* Sembunyikan navigasi interaktif */
             button, .fixed, nav, .ai-button {
                 display: none !important;
             }
 
-            /* Pastikan teks terbaca jelas */
             h2, h3, h4 {
                 color: #0f172a !important;
             }
             
-            /* Tampilkan URL jika diperlukan atau bersihkan shadow berlebih */
             .shadow-sm, .shadow-md, .shadow-xl {
                 box-shadow: none !important;
                 border: 1px solid #e2e8f0 !important;
@@ -92,5 +86,7 @@
 </head>
 <body>
     <div id="root"></div>
+    <!-- Explicit entry point to prevent blank page on deployment -->
+    <script type="module" src="./index.tsx"></script>
 </body>
 </html>
