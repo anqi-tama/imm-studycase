@@ -98,7 +98,7 @@ const App: React.FC = () => {
         </div>
       </nav>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-32 print:max-w-none print:w-full">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-32 print:max-w-none print:w-full print:px-0">
         <header className="mb-8 border-b border-gray-200 pb-6 flex justify-between items-end">
           <div>
             <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">
@@ -112,38 +112,41 @@ const App: React.FC = () => {
             </div>
           </div>
           <div className="hidden print:block text-right">
-             <div className="font-black text-3xl text-[#0f172a]">IMM</div>
-             <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Intelligence Media Monitoring</div>
+             <div className="font-black text-4xl text-[#0f172a]">IMM</div>
+             <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none">Intelligence Media Monitoring</div>
           </div>
         </header>
 
-        <div className="space-y-16">
-          <section id="summary" className="scroll-mt-20 break-inside-avoid">
+        <div className="space-y-16 print:space-y-0">
+          {/* Halaman 1 */}
+          <section id="summary" className="scroll-mt-20">
             <div className={`mb-6 border-b-2 pb-2 flex items-center justify-between ${currentCase === 'wardah' ? 'border-teal-600' : 'border-indigo-600'}`}>
                <h3 className={`text-2xl font-bold ${currentCase === 'wardah' ? 'text-teal-800' : 'text-indigo-800'}`}>
                  1. Executive Summary & Impact
                </h3>
-               <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">Section 01</span>
+               <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">Page 01</span>
             </div>
             <SummaryTab data={currentData} />
           </section>
           
-          <section id="viral-dive" className="scroll-mt-20 pt-8 break-inside-avoid">
+          {/* Halaman 2 */}
+          <section id="viral-dive" className="scroll-mt-20 pt-8">
             <div className={`mb-6 border-b-2 pb-2 flex items-center justify-between ${currentCase === 'wardah' ? 'border-teal-600' : 'border-indigo-600'}`}>
                <h3 className={`text-2xl font-bold ${currentCase === 'wardah' ? 'text-teal-800' : 'text-indigo-800'}`}>
                  2. Viral Analytics Deep Dive
                </h3>
-               <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">Section 02</span>
+               <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">Page 02</span>
             </div>
             <ViralDiveTab data={currentData} />
           </section>
           
-          <section id="content-detail" className="scroll-mt-20 pt-8 break-inside-avoid">
+          {/* Halaman 3 */}
+          <section id="content-detail" className="scroll-mt-20 pt-8">
             <div className={`mb-6 border-b-2 pb-2 flex items-center justify-between ${currentCase === 'wardah' ? 'border-teal-600' : 'border-indigo-600'}`}>
                <h3 className={`text-2xl font-bold ${currentCase === 'wardah' ? 'text-teal-800' : 'text-indigo-800'}`}>
                  3. Content & UGC Insights
                </h3>
-               <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">Section 03</span>
+               <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">Page 03</span>
             </div>
             <ContentDetailTab data={currentData} />
           </section>

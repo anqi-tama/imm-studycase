@@ -14,30 +14,56 @@
             scroll-behavior: smooth;
         }
 
-        /* Desktop Optimization for PDF Export */
+        /* --- PDF EXPORT OPTIMIZATION --- */
         @media print {
             @page {
                 size: A4 landscape;
-                margin: 10mm;
+                margin: 15mm 10mm;
             }
 
             html, body {
-                width: 1280px !important;
+                width: 1200px !important; /* Paksa lebar desktop */
                 height: auto !important;
                 background-color: white !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
+                margin: 0 !important;
+                padding: 0 !important;
             }
 
             #root {
-                width: 1280px !important;
+                width: 1200px !important;
                 margin: 0 auto !important;
             }
 
+            /* Sembunyikan elemen navigasi */
             .no-print {
                 display: none !important;
             }
 
+            /* Halaman 1: Header + Section 1 */
+            #summary {
+                page-break-after: always;
+                break-after: page;
+                display: block !important;
+                padding-bottom: 2rem;
+            }
+
+            /* Halaman 2: Section 2 */
+            #viral-dive {
+                page-break-after: always;
+                break-after: page;
+                display: block !important;
+                padding-top: 2rem;
+            }
+
+            /* Halaman 3: Section 3 */
+            #content-detail {
+                display: block !important;
+                padding-top: 2rem;
+            }
+
+            /* Optimasi visual chart & card */
             .grid {
                 display: grid !important;
             }
@@ -47,28 +73,21 @@
                 break-inside: avoid !important;
             }
 
-            section {
-                padding-top: 2rem !important;
-                margin-bottom: 3rem !important;
-                border-top: 1px solid #e2e8f0;
-            }
-
-            header {
-                margin-bottom: 2rem !important;
-            }
-
-            button, .fixed, nav, .ai-button {
-                display: none !important;
-            }
-
-            h2, h3, h4 {
-                color: #0f172a !important;
-            }
-            
-            .shadow-sm, .shadow-md, .shadow-xl {
+            /* Hilangkan shadow berlebih agar bersih di kertas */
+            .shadow-sm, .shadow-md, .shadow-xl, .shadow-2xl {
                 box-shadow: none !important;
                 border: 1px solid #e2e8f0 !important;
             }
+
+            /* Pastikan teks tetap tajam */
+            h2, h3, h4, p, span, td, th {
+                color: #0f172a !important;
+                -webkit-print-color-adjust: exact;
+            }
+
+            /* Menyesuaikan ukuran font agar pas di landscape */
+            h2 { font-size: 2.5rem !important; }
+            h3 { font-size: 1.75rem !important; }
         }
     </style>
 <script type="importmap">
@@ -86,7 +105,6 @@
 </head>
 <body>
     <div id="root"></div>
-    <!-- Explicit entry point to prevent blank page on deployment -->
     <script type="module" src="./index.tsx"></script>
 </body>
 </html>
