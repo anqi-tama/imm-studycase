@@ -18,11 +18,11 @@
         @media print {
             @page {
                 size: A4 portrait;
-                margin: 15mm 10mm;
+                margin: 10mm 15mm; /* Margin standar kertas */
             }
 
             html, body {
-                width: 800px !important; /* Lebar optimal untuk portrait scaling */
+                width: 794px !important; /* Standar A4 Portrait width */
                 height: auto !important;
                 background-color: white !important;
                 -webkit-print-color-adjust: exact !important;
@@ -32,68 +32,77 @@
             }
 
             #root {
-                width: 800px !important;
+                width: 794px !important;
                 margin: 0 auto !important;
             }
 
-            /* Sembunyikan elemen navigasi interaktif */
             .no-print {
                 display: none !important;
             }
 
-            /* Halaman 1: Header + Section 1 */
+            /* --- PEMBAGIAN HALAMAN --- */
+            
+            /* Pastikan Header & Section 1 di Halaman 1 */
+            header {
+                page-break-after: avoid;
+                break-after: avoid;
+                margin-bottom: 1rem !important;
+                padding-bottom: 1rem !important;
+            }
+
             #summary {
                 page-break-after: always;
                 break-after: page;
                 display: block !important;
-                margin-bottom: 0 !important;
-                padding-bottom: 2rem;
             }
 
-            /* Halaman 2: Section 2 */
+            /* Paksa Section 2 di Halaman 2 */
             #viral-dive {
+                page-break-before: always;
+                break-before: page;
                 page-break-after: always;
                 break-after: page;
                 display: block !important;
                 padding-top: 1rem;
             }
 
-            /* Halaman 3: Section 3 */
+            /* Paksa Section 3 di Halaman 3 */
             #content-detail {
+                page-break-before: always;
+                break-before: page;
                 display: block !important;
                 padding-top: 1rem;
             }
 
-            /* Optimasi visual grid & card agar tidak terpotong */
-            .grid {
-                display: grid !important;
+            /* --- SKALA KONTEN --- */
+            
+            /* Grid tetap 2 kolom untuk KPI agar tidak meluap ke bawah */
+            .grid-cols-4 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 10px !important; }
+            .lg\:grid-cols-3 { grid-template-columns: repeat(1, minmax(0, 1fr)) !important; gap: 10px !important; }
+            
+            /* Kurangi tinggi chart agar muat di 1 halaman */
+            .recharts-responsive-container {
+                height: 250px !important; 
             }
 
-            /* Paksa card menjadi full width jika di portrait sempit, 
-               tapi tetap menjaga grid 2 kolom jika muat */
-            .grid-cols-4 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
-            .lg\:grid-cols-3 { grid-template-columns: repeat(1, minmax(0, 1fr)) !important; }
-            .lg\:col-span-2 { grid-column: span 1 / span 1 !important; }
-
-            section, .bg-white, .rounded-xl, .recharts-responsive-container {
-                page-break-inside: avoid !important;
-                break-inside: avoid !important;
-            }
-
-            /* Bersihkan shadow untuk print */
+            /* Typography & Spacing */
+            h2 { font-size: 1.5rem !important; }
+            h3 { font-size: 1.2rem !important; margin-bottom: 0.5rem !important; }
+            .p-8 { padding: 1rem !important; }
+            .p-6 { padding: 0.75rem !important; }
+            .space-y-16 { gap: 0 !important; }
+            .space-y-6 { gap: 0.5rem !important; }
+            
+            /* Hilangkan shadow & tambah border tipis agar bersih */
             .shadow-sm, .shadow-md, .shadow-xl, .shadow-2xl {
                 box-shadow: none !important;
-                border: 1px solid #e2e8f0 !important;
+                border: 1px solid #e5e7eb !important;
             }
 
-            /* Typography adjustments for Portrait */
-            h2 { font-size: 1.8rem !important; margin-bottom: 0.5rem !important; }
-            h3 { font-size: 1.4rem !important; }
-            p, span, td, th { font-size: 10pt !important; color: #0f172a !important; }
-            
-            header {
-                margin-bottom: 1.5rem !important;
-                border-bottom: 2px solid #e2e8f0 !important;
+            /* Mencegah pemotongan di tengah kartu */
+            .bg-white, .rounded-xl, .rounded-2xl {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
             }
         }
     </style>

@@ -98,8 +98,8 @@ const App: React.FC = () => {
         </div>
       </nav>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-32 print:max-w-none print:w-full print:px-0">
-        <header className="mb-8 border-b border-gray-200 pb-6 flex justify-between items-end">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-32 print:max-w-none print:w-full print:px-0 print:py-0">
+        <header className="mb-8 border-b border-gray-200 pb-6 flex justify-between items-end print:mb-4 print:pb-2">
           <div>
             <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">
               {currentData.name} Performance Overview
@@ -118,9 +118,9 @@ const App: React.FC = () => {
         </header>
 
         <div className="space-y-16 print:space-y-0">
-          {/* Halaman 1: Judul + Section 1 */}
+          {/* HALAMAN 1 */}
           <section id="summary" className="scroll-mt-20">
-            <div className={`mb-6 border-b-2 pb-2 flex items-center justify-between ${currentCase === 'wardah' ? 'border-teal-600' : 'border-indigo-600'}`}>
+            <div className={`mb-6 border-b-2 pb-2 flex items-center justify-between ${currentCase === 'wardah' ? 'border-teal-600' : 'border-indigo-600'} print:mb-3`}>
                <h3 className={`text-2xl font-bold ${currentCase === 'wardah' ? 'text-teal-800' : 'text-indigo-800'}`}>
                  1. Executive Summary & Impact
                </h3>
@@ -129,9 +129,9 @@ const App: React.FC = () => {
             <SummaryTab data={currentData} />
           </section>
           
-          {/* Halaman 2: Section 2 */}
+          {/* HALAMAN 2 */}
           <section id="viral-dive" className="scroll-mt-20 pt-8 print:pt-4">
-            <div className={`mb-6 border-b-2 pb-2 flex items-center justify-between ${currentCase === 'wardah' ? 'border-teal-600' : 'border-indigo-600'}`}>
+            <div className={`mb-6 border-b-2 pb-2 flex items-center justify-between ${currentCase === 'wardah' ? 'border-teal-600' : 'border-indigo-600'} print:mb-3`}>
                <h3 className={`text-2xl font-bold ${currentCase === 'wardah' ? 'text-teal-800' : 'text-indigo-800'}`}>
                  2. Viral Analytics Deep Dive
                </h3>
@@ -140,9 +140,9 @@ const App: React.FC = () => {
             <ViralDiveTab data={currentData} />
           </section>
           
-          {/* Halaman 3: Section 3 */}
+          {/* HALAMAN 3 */}
           <section id="content-detail" className="scroll-mt-20 pt-8 print:pt-4">
-            <div className={`mb-6 border-b-2 pb-2 flex items-center justify-between ${currentCase === 'wardah' ? 'border-teal-600' : 'border-indigo-600'}`}>
+            <div className={`mb-6 border-b-2 pb-2 flex items-center justify-between ${currentCase === 'wardah' ? 'border-teal-600' : 'border-indigo-600'} print:mb-3`}>
                <h3 className={`text-2xl font-bold ${currentCase === 'wardah' ? 'text-teal-800' : 'text-indigo-800'}`}>
                  3. Content & UGC Insights
                </h3>
