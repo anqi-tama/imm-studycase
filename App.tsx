@@ -10,20 +10,9 @@ import { TabId, CaseStudy, CaseStudyData } from './types';
 import SummaryTab from './components/SummaryTab';
 import ViralDiveTab from './components/ViralDiveTab';
 import ContentDetailTab from './components/ContentDetailTab';
-import AiInsight from './components/AiInsight';
 import { WARDAH_DATA } from './data/wardah';
 import { UGM_DATA } from './data/ugm';
 
-const IMMLogo = () => (
-  <svg width="36" height="36" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="transition-transform hover:scale-110">
-    <path d="M50 5C25.1472 5 5 25.1472 5 50C5 74.8528 25.1472 95 50 95C71.321 95 89.2483 80.1411 93.9069 60H65C62.2386 60 60 57.7614 60 55V26.0931C79.8589 30.7517 95 48.679 95 70C95 72.7614 97.2386 75 100 75C102.761 75 105 72.7614 105 70C105 39.6243 80.3757 15 50 15V5C50 2.23858 47.7614 0 45 0C42.2386 0 40 2.23858 40 5V15.1259C43.1932 15.0425 46.5413 15 50 15V5ZM85 5C85 2.23858 87.2386 0 90 0C92.7614 0 95 2.23858 95 5V20C95 22.7614 92.7614 25 90 25H75C72.2386 25 70 22.7614 70 20C70 17.2386 72.2386 15 75 15H85V5Z" fill="#0f172a" style={{ transform: 'scale(0.8) translate(10px, 10px)' }} />
-    <circle cx="50" cy="50" r="45" fill="#0f172a" />
-    <path d="M50 10C72.0914 10 90 27.9086 90 50H50V10Z" fill="white" style={{ transform: 'translate(5px, -5px)' }} />
-    <path d="M50 50L90 50C90 72.0914 72.0914 90 50 90C27.9086 90 10 72.0914 10 50C10 27.9086 27.9086 10 50 10V50Z" fill="#0f172a" />
-  </svg>
-);
-
-// Simplified accurate IMM Logo based on the user's image
 const SimpleIMMLogo = () => (
   <div className="relative w-10 h-10 flex items-center justify-center">
     <div className="absolute inset-0 bg-[#0f172a] rounded-full" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 50%, 50% 50%, 50% 0, 0 0)' }}></div>
@@ -38,6 +27,7 @@ const App: React.FC = () => {
   const currentData: CaseStudyData = currentCase === 'wardah' ? WARDAH_DATA : UGM_DATA;
 
   const handleDownloadPdf = () => {
+    // Memastikan browser siap mencetak dalam mode desktop
     window.print();
   };
 
@@ -54,8 +44,7 @@ const App: React.FC = () => {
         behavior: 'smooth'
       });
     }
-  }
-  ;
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -107,16 +96,13 @@ const App: React.FC = () => {
                 </button>
               </div>
             </div>
-
-            <div className="flex items-center space-x-4">
-              <AiInsight currentCase={currentCase} />
-            </div>
+            {/* AI Analyst button removed as requested */}
           </div>
         </div>
       </nav>
 
       {/* Main Content Area */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-32">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-32 print:max-w-none print:w-full">
         <header className="mb-8 border-b border-gray-200 pb-6 flex justify-between items-end">
           <div>
             <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">
@@ -130,41 +116,41 @@ const App: React.FC = () => {
             </div>
           </div>
           <div className="hidden print:block text-right">
-             <div className="font-black text-2xl text-[#0f172a]">IMM</div>
-             <div className="text-[8px] font-bold text-gray-400">INTELLIGENCE MEDIA MONITORING</div>
+             <div className="font-black text-3xl text-[#0f172a]">IMM</div>
+             <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Intelligence Media Monitoring</div>
           </div>
         </header>
 
-        <div className="space-y-12">
+        <div className="space-y-16">
           {/* Section 1: Summary */}
-          <section id="summary" className="scroll-mt-20">
+          <section id="summary" className="scroll-mt-20 break-inside-avoid">
             <div className={`mb-6 border-b-2 pb-2 flex items-center justify-between ${currentCase === 'wardah' ? 'border-teal-600' : 'border-indigo-600'}`}>
                <h3 className={`text-2xl font-bold ${currentCase === 'wardah' ? 'text-teal-800' : 'text-indigo-800'}`}>
                  1. Executive Summary & Impact
                </h3>
-               <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">Analysis 01</span>
+               <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">Section 01</span>
             </div>
             <SummaryTab data={currentData} />
           </section>
           
           {/* Section 2: Viral Dive */}
-          <section id="viral-dive" className="scroll-mt-20 pt-8 border-t border-gray-100">
+          <section id="viral-dive" className="scroll-mt-20 pt-8 break-inside-avoid">
             <div className={`mb-6 border-b-2 pb-2 flex items-center justify-between ${currentCase === 'wardah' ? 'border-teal-600' : 'border-indigo-600'}`}>
                <h3 className={`text-2xl font-bold ${currentCase === 'wardah' ? 'text-teal-800' : 'text-indigo-800'}`}>
                  2. Viral Analytics Deep Dive
                </h3>
-               <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">Analysis 02</span>
+               <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">Section 02</span>
             </div>
             <ViralDiveTab data={currentData} />
           </section>
           
           {/* Section 3: Content Detail */}
-          <section id="content-detail" className="scroll-mt-20 pt-8 border-t border-gray-100">
+          <section id="content-detail" className="scroll-mt-20 pt-8 break-inside-avoid">
             <div className={`mb-6 border-b-2 pb-2 flex items-center justify-between ${currentCase === 'wardah' ? 'border-teal-600' : 'border-indigo-600'}`}>
                <h3 className={`text-2xl font-bold ${currentCase === 'wardah' ? 'text-teal-800' : 'text-indigo-800'}`}>
                  3. Content & UGC Insights
                </h3>
-               <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">Analysis 03</span>
+               <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">Section 03</span>
             </div>
             <ContentDetailTab data={currentData} />
           </section>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brand Performance Dashboard</title>
+    <title>IMM - Intelligence Media Monitoring</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -13,64 +13,67 @@
             background-color: #f7f9fb;
             scroll-behavior: smooth;
         }
-        .recharts-responsive-container {
-            min-height: 300px;
-        }
 
-        /* Print Optimization for PDF */
+        /* Desktop Optimization for PDF Export */
         @media print {
             @page {
-                margin: 1cm;
-                size: A4 portrait;
+                size: A4 landscape; /* Landscape biasanya lebih baik untuk dashboard lebar */
+                margin: 10mm;
             }
 
-            body {
+            html, body {
+                width: 1280px !important; /* Paksa lebar desktop */
+                height: auto !important;
                 background-color: white !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
-            
+
+            #root {
+                width: 1280px !important;
+                margin: 0 auto !important;
+            }
+
             .no-print {
                 display: none !important;
             }
 
-            /* Ensure stacked sections break onto new pages in PDF */
+            /* Paksa grid Tailwind untuk tetap berfungsi di print */
+            .grid {
+                display: grid !important;
+            }
+
+            /* Hindari pemotongan di tengah elemen */
+            section, .bg-white, .rounded-xl, .recharts-responsive-container {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+
+            /* Header Section Spacing */
             section {
-                page-break-inside: avoid;
-                margin-bottom: 2rem;
+                padding-top: 2rem !important;
+                margin-bottom: 3rem !important;
+                border-top: 1px solid #e2e8f0;
             }
 
-            #viral-dive, #content-detail {
-                page-break-before: always;
-                padding-top: 2rem;
+            header {
+                margin-bottom: 2rem !important;
             }
 
-            /* Expand container for print */
-            main {
-                max-width: 100% !important;
-                padding: 0 !important;
-                margin: 0 !important;
+            /* Sembunyikan navigasi interaktif */
+            button, .fixed, nav, .ai-button {
+                display: none !important;
             }
 
-            .max-w-7xl {
-                max-width: 100% !important;
-            }
-
-            /* Chart Adjustments for Print */
-            .recharts-responsive-container {
-                width: 100% !important;
-                height: 350px !important;
-                page-break-inside: avoid;
+            /* Pastikan teks terbaca jelas */
+            h2, h3, h4 {
+                color: #0f172a !important;
             }
             
-            header {
-                border-bottom: 2px solid #e2e8f0 !important;
-                padding-bottom: 1rem !important;
-            }
-
-            /* Hide interactive elements in PDF */
-            button, .fixed, nav {
-                display: none !important;
+            /* Tampilkan URL jika diperlukan atau bersihkan shadow berlebih */
+            .shadow-sm, .shadow-md, .shadow-xl {
+                box-shadow: none !important;
+                border: 1px solid #e2e8f0 !important;
             }
         }
     </style>
@@ -86,10 +89,8 @@
   }
 }
 </script>
-<link rel="stylesheet" href="/index.css">
 </head>
 <body>
     <div id="root"></div>
-<script type="module" src="/index.tsx"></script>
 </body>
 </html>
