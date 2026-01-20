@@ -4,116 +4,111 @@ import { CaseStudyData } from '../types';
 export const RSPAD_DATA: CaseStudyData = {
   id: 'rspad',
   name: 'RSPAD Gatot Soebroto',
-  period: '3 – 17 January 2026 (Digital Intelligence)',
+  period: '03 – 17 Januari 2026',
   banner: {
-    title: 'Pusat Otoritas Medis Modern',
-    description: 'RSPAD holds an unshakable reputation as the national referral hospital, shifting perceptions from a military facility to a global center of medical excellence.',
-    tagValue: '2.2M',
-    tagLabel: 'Total Social Reach'
+    title: 'Social Media & Digital Intelligence',
+    description: 'RSPAD as the ultimate safety net. Sentiment driven by professionalism and institutional trust amid critical national emergency cases.',
+    tagValue: '119',
+    tagLabel: 'Total Mentions'
   },
   kpis: [
-    { label: 'Volume Mentions', value: '119', sub: '+17% vs Prev Period', status: 'Rising', color: 'teal' },
-    { label: 'Social Reach', value: '2.2M', sub: '+219% Viral Spike', status: 'Peaked', color: 'blue' },
-    { label: 'Non-Media Reach', value: '341K', sub: '+12% News Pickup', status: 'Steady', color: 'indigo' },
-    { label: 'Total Interaction', value: '32,464', sub: 'Significant Growth', status: 'Viral', color: 'green' }
+    { label: 'Total Mentions', value: '119', sub: '+17% growth', status: 'Baseline', color: 'teal' },
+    { label: 'Social Reach', value: '2.2M', sub: '+219% viral impact', status: 'High Reach', color: 'green' },
+    { label: 'Non-Social Reach', value: '341K', sub: 'Media & Web Authority', status: 'Stable', color: 'blue' },
+    { label: 'AVE (Value)', value: '$195K', sub: 'Advertising Equivalence', status: 'High Value', color: 'indigo' }
   ],
   summaryStats: {
     positiveSentiment: '67%',
-    perceptionRise: '+219%',
-    topFeedback: 'Code Stroke Excellence'
+    perceptionRise: '+17%',
+    topFeedback: 'Trust Anchor'
   },
   campaignData: [
-    { name: 'Baseline', sales: 102, er: 12 },
-    { name: 'Jan 26 Spike', sales: 119, er: 28 },
+    { name: 'Jan 03-10', sales: 41, er: 12 },
+    { name: 'Jan 11-17', sales: 78, er: 28 },
   ],
   awards: [
-    { title: 'Rujukan Nasional', subtitle: 'Pusat Otoritas Medis Terpercaya', icon: 'award' },
-    { title: 'Transformation JKN', subtitle: 'Layanan Pasien Terintegrasi', icon: 'check' }
+    { title: 'Code Stroke RSPAD', subtitle: 'Highest Positive Sentiment', icon: 'check' },
+    { title: 'Stem Cell Research', subtitle: 'Strategic Medical Authority', icon: 'check' }
   ],
   viralSnapshots: [
-    { emoji: '🚑', title: 'Code Stroke Success', stats: 'TikTok/YT: Fast Response Recognition' },
-    { emoji: '💂', title: 'Pangkostrad Visit', stats: 'X: High Authority Mention' }
+    { emoji: '🚑', title: 'IGD Emergency', stats: 'Social Reach: 2.2M | Viral External' },
+    { emoji: '💂', title: 'Pangkostrad Visit', stats: 'Top Keyword Context' }
   ],
   timelineData: [
-    { date: '03 Jan', mentions: 7 },
-    { date: '05 Jan', mentions: 10 },
-    { date: '07 Jan', mentions: 17 },
-    { date: '09 Jan', mentions: 7 },
-    { date: '11 Jan', mentions: 2 },
-    { date: '13 Jan', mentions: 15 },
-    { date: '15 Jan', mentions: 15 },
-    { date: '17 Jan', mentions: 1 },
-  ],
-  waves: [
-    { label: 'Wave 1: Code Stroke Success (Jan 07)', color: 'teal' },
-    { label: 'Wave 2: Pangkostrad Visit & National Reach (Jan 13)', color: 'blue' }
+    { date: 'Jan 03', mentions: 7, baseline: 5, wave1: 2 },
+    { date: 'Jan 05', mentions: 10, baseline: 4, wave1: 6 },
+    { date: 'Jan 07', mentions: 17, baseline: 5, wave1: 12 },
+    { date: 'Jan 09', mentions: 7, baseline: 4, wave1: 3 },
+    { date: 'Jan 11', mentions: 2, baseline: 2 },
+    { date: 'Jan 13', mentions: 15, baseline: 3, wave2: 12 },
+    { date: 'Jan 15', mentions: 15, baseline: 2, wave2: 5, wave3: 8 },
+    { date: 'Jan 17', mentions: 1, baseline: 1 },
   ],
   sovData: [
-    { name: 'X (Twitter)', value: 40, color: '#1d9bf0' },
-    { name: 'TikTok', value: 25, color: '#000000' },
-    { name: 'YouTube', value: 25, color: '#ff0000' },
-    { name: 'Others', value: 10, color: '#64748b' },
+    { name: 'X (Twitter)', value: 40, color: '#1f2937' },
+    { name: 'TikTok', value: 25, color: '#38bdf8' },
+    { name: 'YouTube', value: 25, color: '#ef4444' },
+    { name: 'Others', value: 10, color: '#94a3b8' },
   ],
   breakdownTable: [
-    { platform: 'TikTok', product: 'Humanist Content', er: '4.2%', insight: 'Highest organic growth, Rising Star' },
-    { platform: 'Instagram', product: 'Visual Presence', er: '3.2%', insight: 'Trust anchor, largest base' },
-    { platform: 'X (Twitter)', product: 'News/Narrative', er: 'Low', insight: 'Uncontrolled narrative, 2.2M Reach' },
-    { platform: 'YouTube', product: 'Education', er: '2.0%', insight: 'Education Hub for services' }
+    { platform: 'TikTok @rspadgs', product: 'Edukasi Ringkas', er: '4.2%', insight: 'Rising Star, high organic engagement' },
+    { platform: 'Instagram @rspadgs', product: 'Trust Anchor', er: '3.2%', insight: 'Massa terbesar, fokus kredibilitas' },
+    { platform: 'YouTube Official', product: 'Education Hub', er: '2.0%', insight: 'Profil layanan mendalam' },
+    { platform: 'X Mentions', product: 'External News', er: 'N/A', insight: 'Objek pembicaraan nasional' }
   ],
   hashtags: [
-    { tag: '#rspad', count: 14 },
-    { tag: '#codestroke', count: 8 },
-    { tag: '#rspadgatotsoebroto', count: 4 },
-    { tag: '#periodeemasstroke', count: 3 },
-    { tag: '#stemcell', count: 2 },
+    { tag: '#RSPAD', count: 85 },
+    { tag: '#GatotSoebroto', count: 42 },
+    { tag: '#CodeStroke', count: 30 },
+    { tag: '#StemCell', count: 18 },
   ],
   contentDetail: {
     positiveDrivers: [
-      "Profesionalisme Medis Tinggi",
-      "Keberhasilan Layanan Code Stroke",
-      "Kunjungan Tokoh Nasional",
-      "Edukasi Stem Cell & Medis"
+      "Profesionalisme Layanan IGD",
+      "Kecepatan Code Stroke",
+      "Otoritas Medis Modern",
+      "Kolaborasi Riset Internasional"
     ],
     highlight1: {
-      type: 'TikTok Viral UGC',
-      title: 'Ucapan Natal & Tahun Baru',
-      creator: '@rspadgs',
+      type: 'Viral Narrative',
+      title: 'Code Stroke RSPAD',
+      creator: 'TikTok / YouTube UGC',
       metrics: [
-        { label: 'Likes', value: '448' },
-        { label: 'Engagement', value: 'High' }
+        { label: 'Reach', value: '2.2M' },
+        { label: 'Growth', value: '219%' }
       ],
       notes: [
-        'Sentiment: Very positive response to hospitality.',
-        'Insight: Audience prefers humanist over formal.'
+        'Context: Pasien dievakuasi dalam hitungan menit.',
+        'Impact: Memperkuat citra ultimate safety net.'
       ]
     },
     highlight2: {
-      type: 'Educational Series',
-      title: 'Layanan Code Stroke',
-      creator: 'RSPAD Internal',
+      type: 'Strategic Event',
+      title: 'Kunjungan Pangkostrad',
+      creator: 'Official & Media',
       metrics: [
-        { label: 'Social Reach', value: 'Viral' },
-        { label: 'UGC Content', value: '61 Posts' }
+        { label: 'Mentions', value: 'High' },
+        { label: 'Impact', value: 'Institutional' }
       ],
       notes: [
-        'Impact: Proves educational value is viral.',
-        'Status: Highest save rate among healthcare.'
+        'Context: Memperkuat profil rumah sakit militer.',
+        'Strategy: Gunakan storytelling humanis.'
       ]
     },
     platformDeepDive: {
-      title: 'X (Twitter) Vulnerability',
+      title: 'Owned Media Gap',
       items: [
-        { label: 'Logistic Complaints', text: 'Minor sentiment drag from parking/taxi.' },
-        { label: 'Narrative Control', text: 'High reach but lacks official presence.' }
+        { label: 'Narasi Eksternal', text: 'Mencapai 2.2M jangkauan.' },
+        { label: 'Interaksi Internal', text: 'Masih di bawah 200 interaksi.' }
       ],
-      metricLabel: 'Uncontrolled Reach',
-      metricPercent: '2.2M'
+      metricLabel: 'Narrative Control',
+      metricPercent: '15%'
     },
     articles: [
-      { title: "Kunjungan Pangkostrad di RSPAD", source: "TNI AD", views: "15K+", impact: "Authority Driver" },
-      { title: "Layanan Sel Punca Mayapada x RSPAD", source: "CNBC", views: "25K", impact: "Research Credibility" },
-      { title: "Penanganan Insiden Kecelakaan", source: "Kompas TV", views: "45K", impact: "Contextual Negative" },
-      { title: "Transformasi JKN di Rumah Sakit", source: "Antara", views: "10K", impact: "Policy Support" }
+      { title: "Code Stroke RSPAD Viral", source: "TikTok", views: "1M+", impact: "Viral Sentiment" },
+      { title: "Kolaborasi Stem Cell Mayapada", source: "CNBC", views: "341K", impact: "Authority" },
+      { title: "Toleransi Natal Bersama", source: "Internal", views: "Low", impact: "Institutional" },
+      { title: "Edukasi Super Flu", source: "Official", views: "Stable", impact: "Health Education" }
     ]
   }
 };

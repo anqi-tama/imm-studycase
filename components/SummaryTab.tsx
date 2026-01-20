@@ -4,7 +4,7 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
 } from 'recharts';
 import { Award, CheckCircle2, TrendingUp, Info } from 'lucide-react';
-import { CaseStudyData } from '../types';
+import { CaseStudyData } from '../types.ts';
 
 interface SummaryTabProps {
   data: CaseStudyData;
@@ -12,31 +12,43 @@ interface SummaryTabProps {
 
 const SummaryTab: React.FC<SummaryTabProps> = ({ data }) => {
   const isWardah = data.id === 'wardah';
+  const isRspad = data.id === 'rspad';
+  const isUgm = data.id === 'ugm';
+
+  const getGradient = () => {
+    if (isWardah) return 'from-teal-600 via-teal-700 to-teal-800';
+    if (isUgm) return 'from-indigo-600 via-indigo-700 to-indigo-800';
+    return 'from-emerald-700 via-emerald-800 to-emerald-900';
+  };
+
+  const getMainColor = () => {
+    if (isWardah) return '#0d9488';
+    if (isUgm) return '#4f46e5';
+    return '#059669';
+  };
 
   return (
     <div className="space-y-6">
-      {/* Strategic Pivot Banner */}
-      <div className={`relative overflow-hidden rounded-2xl p-8 shadow-xl text-white bg-gradient-to-br ${isWardah ? 'from-teal-600 via-teal-700 to-teal-800' : 'from-indigo-600 via-indigo-700 to-indigo-800'}`}>
+      <div className={`relative overflow-hidden rounded-2xl p-8 shadow-xl text-white bg-gradient-to-br ${getGradient()}`}>
         <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8">
           <div className="lg:max-w-2xl">
             <div className="inline-flex items-center px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm text-xs font-bold uppercase tracking-wider mb-4">
               <TrendingUp size={14} className="mr-2" /> Strategic Update
             </div>
             <h3 className="text-3xl font-bold mb-3">{data.banner.title}</h3>
-            <p className={`text-xl font-light italic leading-relaxed ${isWardah ? 'text-teal-50' : 'text-indigo-50'}`}>
+            <p className={`text-xl font-light italic leading-relaxed opacity-90`}>
               "{data.banner.description}"
             </p>
           </div>
           <div className="flex-shrink-0 bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 text-center shadow-2xl min-w-[200px]">
             <span className="block text-4xl font-black mb-1">{data.banner.tagValue}</span>
-            <span className={`text-sm font-semibold uppercase tracking-widest ${isWardah ? 'text-teal-200' : 'text-indigo-200'}`}>
+            <span className={`text-sm font-semibold uppercase tracking-widest opacity-80`}>
               {data.banner.tagLabel}
             </span>
           </div>
         </div>
       </div>
 
-      {/* KPI Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {data.kpis.map((kpi, idx) => (
           <div key={idx} className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
@@ -45,7 +57,7 @@ const SummaryTab: React.FC<SummaryTabProps> = ({ data }) => {
             <div className="flex items-center text-xs">
               <span className="text-gray-400 font-medium">{kpi.sub}</span>
               <span className={`ml-auto flex items-center font-bold px-2 py-0.5 rounded-full ${
-                kpi.color === 'teal' ? 'bg-teal-50 text-teal-700' :
+                kpi.color === 'teal' || kpi.color === 'green' ? 'bg-emerald-50 text-emerald-700' :
                 kpi.color === 'blue' ? 'bg-blue-50 text-blue-700' :
                 kpi.color === 'indigo' ? 'bg-indigo-50 text-indigo-700' :
                 'bg-green-50 text-green-700'
@@ -58,7 +70,6 @@ const SummaryTab: React.FC<SummaryTabProps> = ({ data }) => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Main Chart Card */}
         <div className="lg:col-span-2 bg-white rounded-xl p-6 shadow-sm border border-gray-100">
           <div className="flex items-center justify-between mb-6">
             <h3 className="text-lg font-bold text-gray-800">Analysis Comparison</h3>
@@ -66,13 +77,13 @@ const SummaryTab: React.FC<SummaryTabProps> = ({ data }) => {
           </div>
           
           <div className="grid grid-cols-3 gap-4 mb-8">
-            <div className={`${isWardah ? 'bg-teal-50/50 border-teal-100' : 'bg-indigo-50/50 border-indigo-100'} p-4 rounded-lg text-center border`}>
-              <span className={`block text-2xl font-bold ${isWardah ? 'text-teal-700' : 'text-indigo-700'}`}>{data.summaryStats.positiveSentiment}</span>
-              <span className={`text-xs font-semibold uppercase ${isWardah ? 'text-teal-600' : 'text-indigo-600'}`}>Pos. Sentiment</span>
+            <div className={`p-4 rounded-lg text-center border ${isWardah ? 'bg-teal-50/50 border-teal-100' : isUgm ? 'bg-indigo-50/50 border-indigo-100' : 'bg-emerald-50/50 border-emerald-100'}`}>
+              <span className={`block text-2xl font-bold ${isWardah ? 'text-teal-700' : isUgm ? 'text-indigo-700' : 'text-emerald-700'}`}>{data.summaryStats.positiveSentiment}</span>
+              <span className={`text-xs font-semibold uppercase opacity-70`}>Pos. Sentiment</span>
             </div>
-            <div className={`${isWardah ? 'bg-indigo-50/50 border-indigo-100' : 'bg-blue-50/50 border-blue-100'} p-4 rounded-lg text-center border`}>
-              <span className={`block text-2xl font-bold ${isWardah ? 'text-indigo-700' : 'text-blue-700'}`}>{data.summaryStats.perceptionRise}</span>
-              <span className={`text-xs font-semibold uppercase ${isWardah ? 'text-indigo-600' : 'text-blue-600'}`}>Growth pts</span>
+            <div className={`p-4 rounded-lg text-center border ${isWardah ? 'bg-indigo-50/50 border-indigo-100' : isUgm ? 'bg-blue-50/50 border-blue-100' : 'bg-emerald-50/50 border-emerald-100'}`}>
+              <span className={`block text-2xl font-bold ${isWardah ? 'text-indigo-700' : isUgm ? 'text-blue-700' : 'text-emerald-700'}`}>{data.summaryStats.perceptionRise}</span>
+              <span className={`text-xs font-semibold uppercase opacity-70`}>Growth pts</span>
             </div>
             <div className="bg-red-50/50 p-4 rounded-lg text-center border border-red-100">
               <span className="block text-sm font-bold text-red-700 line-clamp-1">"{data.summaryStats.topFeedback}"</span>
@@ -89,29 +100,31 @@ const SummaryTab: React.FC<SummaryTabProps> = ({ data }) => {
                 <YAxis yAxisId="right" orientation="right" axisLine={false} tickLine={false} tick={{fill: '#64748b', fontSize: 12}} />
                 <Tooltip contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1)' }} />
                 <Legend iconType="circle" wrapperStyle={{ paddingTop: '20px' }} />
-                <Bar yAxisId="left" dataKey="sales" name={isWardah ? "Sales (IDR Billion)" : "Mentions (Volume)"} fill={isWardah ? "#0d9488" : "#4f46e5"} radius={[4, 4, 0, 0]} barSize={50} />
+                <Bar yAxisId="left" dataKey="sales" name={isRspad ? "Mentions (Weekly)" : (isWardah ? "Sales (IDR Billion)" : "Mentions (Volume)")} fill={getMainColor()} radius={[4, 4, 0, 0]} barSize={50} />
                 <Bar yAxisId="right" dataKey="er" name="Engagement Rate (%)" fill="#4ade80" radius={[4, 4, 0, 0]} barSize={50} />
               </BarChart>
             </ResponsiveContainer>
           </div>
         </div>
 
-        {/* Awards & Trending Column */}
         <div className="space-y-6">
-          <div className={`p-6 rounded-xl border shadow-sm ${isWardah ? 'bg-gradient-to-br from-indigo-50 to-indigo-100 border-indigo-200' : 'bg-gradient-to-br from-teal-50 to-teal-100 border-teal-200'}`}>
-            <h3 className={`text-lg font-bold mb-4 flex items-center ${isWardah ? 'text-indigo-900' : 'text-teal-900'}`}>
-              <Award className={`mr-2 ${isWardah ? 'text-indigo-600' : 'text-teal-600'}`} size={20} />
-              {isWardah ? 'Awards & Recognition' : 'Core Identity'}
+          <div className={`p-6 rounded-xl border shadow-sm ${
+            isWardah ? 'bg-gradient-to-br from-indigo-50 to-indigo-100 border-indigo-200' : 
+            isUgm ? 'bg-gradient-to-br from-teal-50 to-teal-100 border-teal-200' : 
+            'bg-gradient-to-br from-emerald-50 to-emerald-100 border-emerald-200'}`}>
+            <h3 className={`text-lg font-bold mb-4 flex items-center text-gray-900`}>
+              <Award className={`mr-2 ${isWardah ? 'text-teal-600' : isUgm ? 'text-indigo-600' : 'text-emerald-600'}`} size={20} />
+              {isRspad ? 'Sentiment Spotlights' : (isWardah ? 'Awards & Recognition' : 'Core Identity')}
             </h3>
             <ul className="space-y-4">
               {data.awards.map((award, i) => (
                 <li key={i} className="flex items-start bg-white/60 p-3 rounded-lg border border-gray-100">
-                  <div className={`p-1.5 rounded-lg mr-3 ${award.icon === 'award' ? 'bg-yellow-100 text-yellow-600' : 'bg-green-100 text-green-600'}`}>
+                  <div className={`p-1.5 rounded-lg mr-3 ${award.icon === 'award' ? 'bg-yellow-100 text-yellow-600' : 'bg-emerald-100 text-emerald-600'}`}>
                     {award.icon === 'award' ? <Award size={18} /> : <CheckCircle2 size={18} />}
                   </div>
                   <div>
                     <p className="font-bold text-gray-950 text-sm">{award.title}</p>
-                    <p className="text-xs text-gray-700">{award.subtitle}</p>
+                    <p className="text-xs text-gray-700 line-clamp-2">{award.subtitle}</p>
                   </div>
                 </li>
               ))}
@@ -120,8 +133,8 @@ const SummaryTab: React.FC<SummaryTabProps> = ({ data }) => {
 
           <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
             <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
-              <TrendingUp className={`mr-2 ${isWardah ? 'text-teal-600' : 'text-indigo-600'}`} size={20} />
-              Viral Snapshot
+              <TrendingUp className={`mr-2 ${isWardah ? 'text-teal-600' : isUgm ? 'text-indigo-600' : 'text-emerald-600'}`} size={20} />
+              {isRspad ? 'Profile Pengaruh' : 'Viral Snapshot'}
             </h3>
             <div className="space-y-3">
               {data.viralSnapshots.map((snap, i) => (

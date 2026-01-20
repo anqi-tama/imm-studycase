@@ -35,13 +35,13 @@ export const WARDAH_DATA: CaseStudyData = {
     { emoji: '🎾', title: 'Padel Mastery Showdown', stats: 'IG Reels: 1.2M+ Views | 25% ER' }
   ],
   timelineData: [
-    { date: 'Nov 1', mentions: 1000 },
-    { date: 'Nov 5', mentions: 1500 },
-    { date: 'Nov 10', mentions: 4200 },
-    { date: 'Nov 15', mentions: 5800 },
-    { date: 'Nov 20', mentions: 3100 },
-    { date: 'Nov 25', mentions: 3900 },
-    { date: 'Nov 30', mentions: 5000 },
+    { date: 'Nov 1', mentions: 1000, baseline: 1000 },
+    { date: 'Nov 5', mentions: 1500, baseline: 1100, wave1: 400 },
+    { date: 'Nov 10', mentions: 4200, baseline: 1000, wave1: 3200 },
+    { date: 'Nov 15', mentions: 5800, baseline: 1200, wave1: 1600, wave2: 3000 },
+    { date: 'Nov 20', mentions: 3100, baseline: 1100, wave2: 2000 },
+    { date: 'Nov 25', mentions: 3900, baseline: 1200, wave2: 2700 },
+    { date: 'Nov 30', mentions: 5000, baseline: 1500, wave2: 3500 },
   ],
   sovData: [
     { name: 'Instagram', value: 47, color: '#f472b6' },

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brand Performance Dashboard</title>
+    <title>IMM - Intelligence Media Monitoring</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -13,65 +13,93 @@
             background-color: #f7f9fb;
             scroll-behavior: smooth;
         }
-        .recharts-responsive-container {
-            min-height: 300px;
-        }
 
-        /* Print Optimization for PDF */
+        /* --- PDF EXPORT OPTIMIZATION (A4 PORTRAIT) --- */
         @media print {
             @page {
-                margin: 1cm;
                 size: A4 portrait;
+                margin: 15mm 15mm; /* Memberikan margin yang cukup seperti desktop */
             }
 
-            body {
+            html, body {
+                width: 850px !important; /* Lebar optimal agar layout desktop tidak hancur saat di-scale ke A4 */
+                height: auto !important;
                 background-color: white !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
+                margin: 0 !important;
+                padding: 0 !important;
             }
-            
+
+            #root {
+                width: 850px !important;
+                margin: 0 auto !important;
+            }
+
             .no-print {
                 display: none !important;
             }
 
-            /* Ensure stacked sections break onto new pages in PDF */
-            section {
-                page-break-inside: avoid;
-                margin-bottom: 2rem;
-            }
-
-            #viral-dive, #content-detail {
-                page-break-before: always;
-                padding-top: 2rem;
-            }
-
-            /* Expand container for print */
-            main {
-                max-width: 100% !important;
-                padding: 0 !important;
-                margin: 0 !important;
-            }
-
-            .max-w-7xl {
-                max-width: 100% !important;
-            }
-
-            /* Chart Adjustments for Print */
-            .recharts-responsive-container {
-                width: 100% !important;
-                height: 350px !important;
-                page-break-inside: avoid;
-            }
+            /* --- KONTROL HALAMAN --- */
             
             header {
-                border-bottom: 2px solid #e2e8f0 !important;
+                page-break-after: avoid;
+                margin-bottom: 2rem !important;
                 padding-bottom: 1rem !important;
+                border-bottom: 2px solid #f1f5f9 !important;
             }
 
-            /* Hide interactive elements in PDF */
-            button, .fixed, nav {
-                display: none !important;
+            /* Halaman 1: Judul + Section 1 */
+            #summary {
+                page-break-after: always;
+                break-after: page;
+                display: block !important;
+                margin-bottom: 0 !important;
             }
+
+            /* Halaman 2: Section 2 */
+            #viral-dive {
+                page-break-before: always;
+                break-before: page;
+                page-break-after: always;
+                break-after: page;
+                display: block !important;
+                padding-top: 1rem;
+            }
+
+            /* Halaman 3: Section 3 */
+            #content-detail {
+                page-break-before: always;
+                break-before: page;
+                display: block !important;
+                padding-top: 1rem;
+            }
+
+            /* --- SKALA ELEMEN --- */
+            
+            /* Pastikan Grid tetap terlihat profesional (2 kolom) */
+            .grid-cols-4 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 15px !important; }
+            .lg\:grid-cols-3 { grid-template-columns: repeat(1, minmax(0, 1fr)) !important; gap: 20px !important; }
+            
+            /* Sesuaikan tinggi chart agar pas di halaman */
+            .recharts-responsive-container {
+                height: 320px !important; 
+            }
+
+            /* Hilangkan shadow berlebih dan gunakan border tipis */
+            .shadow-sm, .shadow-md, .shadow-xl, .shadow-2xl {
+                box-shadow: none !important;
+                border: 1px solid #e2e8f0 !important;
+            }
+
+            .rounded-xl, .rounded-2xl {
+                border-radius: 12px !important;
+            }
+
+            /* Tipografi untuk Cetak */
+            h2 { font-size: 2rem !important; font-weight: 800 !important; color: #0f172a !important; }
+            h3 { font-size: 1.5rem !important; font-weight: 700 !important; }
+            p, span, td, th { color: #1e293b !important; }
         }
     </style>
 <script type="importmap">
@@ -89,5 +117,6 @@
 </head>
 <body>
     <div id="root"></div>
+    <script type="module" src="./index.tsx"></script>
 </body>
 </html>

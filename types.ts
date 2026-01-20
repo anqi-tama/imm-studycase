@@ -13,6 +13,10 @@ export interface KPI {
 export interface ViralWave {
   date: string;
   mentions: number;
+  wave1?: number; // Nilai spesifik gelombang 1
+  wave2?: number; // Nilai spesifik gelombang 2
+  wave3?: number; // Nilai spesifik gelombang 3
+  baseline?: number; // Nilai dasar tanpa viralitas
 }
 
 export interface PlatformSOV {
@@ -33,11 +37,6 @@ export interface Article {
   source: string;
   views: string;
   impact: string;
-}
-
-export interface WaveLegend {
-  label: string;
-  color: 'red' | 'blue' | 'indigo' | 'emerald' | 'teal';
 }
 
 export interface CaseStudyData {
@@ -68,7 +67,6 @@ export interface CaseStudyData {
     stats: string;
   }[];
   timelineData: ViralWave[];
-  waves: WaveLegend[];
   sovData: PlatformSOV[];
   breakdownTable: ContentRow[];
   hashtags: { tag: string; count: number }[];
