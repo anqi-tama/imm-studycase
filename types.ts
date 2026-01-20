@@ -1,6 +1,6 @@
 
 export type TabId = 'summary' | 'viral-dive' | 'content-detail';
-export type CaseStudy = 'wardah' | 'ugm';
+export type CaseStudy = 'wardah' | 'ugm' | 'rspad';
 
 export interface KPI {
   label: string;
@@ -35,6 +35,11 @@ export interface Article {
   impact: string;
 }
 
+export interface WaveLegend {
+  label: string;
+  color: 'red' | 'blue' | 'indigo' | 'emerald' | 'teal';
+}
+
 export interface CaseStudyData {
   id: CaseStudy;
   name: string;
@@ -63,6 +68,7 @@ export interface CaseStudyData {
     stats: string;
   }[];
   timelineData: ViralWave[];
+  waves: WaveLegend[];
   sovData: PlatformSOV[];
   breakdownTable: ContentRow[];
   hashtags: { tag: string; count: number }[];
