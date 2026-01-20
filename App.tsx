@@ -6,12 +6,14 @@ import {
   LayoutDashboard, 
   Download
 } from 'lucide-react';
-import { TabId, CaseStudy, CaseStudyData } from './types.ts';
-import SummaryTab from './components/SummaryTab.tsx';
-import ViralDiveTab from './components/ViralDiveTab.tsx';
-import ContentDetailTab from './components/ContentDetailTab.tsx';
-import { WARDAH_DATA } from './data/wardah.ts';
-import { UGM_DATA } from './data/ugm.ts';
+import { TabId, CaseStudy, CaseStudyData } from './types';
+import SummaryTab from './components/SummaryTab';
+import ViralDiveTab from './components/ViralDiveTab';
+import ContentDetailTab from './components/ContentDetailTab';
+import AiInsight from './components/AiInsight';
+import { WARDAH_DATA } from './data/wardah';
+import { UGM_DATA } from './data/ugm';
+import { RSPAD_DATA } from './data/rspad';
 
 const SimpleIMMLogo = () => (
   <div className="relative w-10 h-10 flex items-center justify-center">
@@ -24,7 +26,15 @@ const App: React.FC = () => {
   const [currentCase, setCurrentCase] = useState<CaseStudy>('wardah');
   const [activeTab, setActiveTab] = useState<TabId>('summary');
 
-  const currentData: CaseStudyData = currentCase === 'wardah' ? WARDAH_DATA : UGM_DATA;
+  const getCaseData = (study: CaseStudy): CaseStudyData => {
+    switch(study) {
+      case 'ugm': return UGM_DATA;
+      case 'rspad': return RSPAD_DATA;
+      default: return WARDAH_DATA;
+    }
+  };
+
+  const currentData: CaseStudyData = getCaseData(currentCase);
 
   const handleDownloadPdf = () => {
     window.print();
@@ -65,6 +75,14 @@ const App: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const getBrandColorClass = (study: CaseStudy) => {
+    if (study === 'wardah') return 'teal';
+    if (study === 'ugm') return 'indigo';
+    return 'emerald'; // for RSPAD
+  };
+
+  const color = getBrandColorClass(currentCase);
+
   return (
     <div className="min-h-screen bg-[#f7f9fb]">
       <nav className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm no-print">
@@ -79,74 +97,109 @@ const App: React.FC = () => {
                 </div>
               </div>
               
-              <div className="flex items-center space-x-6">
+              <div className="flex items-center space-x-4 overflow-x-auto no-scrollbar">
                 <button 
                   onClick={() => setCurrentCase('wardah')}
-                  className={`flex items-center text-sm font-bold h-16 px-1 border-b-2 transition-all ${currentCase === 'wardah' ? 'text-teal-700 border-teal-600' : 'text-gray-500 border-transparent hover:text-teal-600'}`}
+                  className={`flex items-center text-xs sm:text-sm font-bold h-16 px-1 border-b-2 whitespace-nowrap transition-all ${currentCase === 'wardah' ? 'text-teal-700 border-teal-600' : 'text-gray-500 border-transparent hover:text-teal-600'}`}
                 >
-                  Study Case Wardah
+                  Wardah
                 </button>
                 <button 
                   onClick={() => setCurrentCase('ugm')}
-                  className={`flex items-center text-sm font-bold h-16 px-1 border-b-2 transition-all ${currentCase === 'ugm' ? 'text-indigo-700 border-indigo-600' : 'text-gray-500 border-transparent hover:text-indigo-600'}`}
+                  className={`flex items-center text-xs sm:text-sm font-bold h-16 px-1 border-b-2 whitespace-nowrap transition-all ${currentCase === 'ugm' ? 'text-indigo-700 border-indigo-600' : 'text-gray-500 border-transparent hover:text-indigo-600'}`}
                 >
-                  Study Case UGM
+                  UGM
+                </button>
+                <button 
+                  onClick={() => setCurrentCase('rspad')}
+                  className={`flex items-center text-xs sm:text-sm font-bold h-16 px-1 border-b-2 whitespace-nowrap transition-all ${currentCase === 'rspad' ? 'text-emerald-700 border-emerald-600' : 'text-gray-500 border-transparent hover:text-emerald-600'}`}
+                >
+                  RSPAD
                 </button>
               </div>
+            </div>
+
+            <div className="flex items-center space-x-4">
+              <AiInsight currentCase={currentCase} />
             </div>
           </div>
         </div>
       </nav>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-32 print:max-w-none print:w-full print:px-0 print:py-0">
-        <header className="mb-8 border-b border-gray-200 pb-6 flex justify-between items-end print:mb-4 print:pb-2">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-32">
+        <header className="mb-8 border-b border-gray-200 pb-6 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
           <div>
             <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">
               {currentData.name} Performance Overview
             </h2>
             <div className="flex items-center mt-2 text-gray-500 font-medium">
-              <span className={`px-3 py-1 rounded-full text-xs font-bold mr-3 ${currentCase === 'wardah' ? 'bg-teal-50 text-teal-700' : 'bg-indigo-50 text-indigo-700'}`}>
+              <span className={`px-3 py-1 rounded-full text-xs font-bold mr-3 ${
+                color === 'teal' ? 'bg-teal-50 text-teal-700' : 
+                color === 'indigo' ? 'bg-indigo-50 text-indigo-700' : 
+                'bg-emerald-50 text-emerald-700'
+              }`}>
                 IMM REPORT
               </span>
               <span className="text-sm">{currentData.period}</span>
             </div>
           </div>
           <div className="hidden print:block text-right">
-             <div className="font-black text-3xl text-[#0f172a]">IMM</div>
-             <div className="text-[8px] font-bold text-gray-400 uppercase tracking-widest leading-none">Intelligence Media Monitoring</div>
+             <div className="font-black text-2xl text-[#0f172a]">IMM</div>
+             <div className="text-[8px] font-bold text-gray-400 uppercase">Intelligence Media Monitoring</div>
           </div>
         </header>
 
-        <div className="space-y-16 print:space-y-0">
-          {/* HALAMAN 1 */}
+        <div className="space-y-12">
           <section id="summary" className="scroll-mt-20">
-            <div className={`mb-6 border-b-2 pb-2 flex items-center justify-between ${currentCase === 'wardah' ? 'border-teal-600' : 'border-indigo-600'} print:mb-3`}>
-               <h3 className={`text-2xl font-bold ${currentCase === 'wardah' ? 'text-teal-800' : 'text-indigo-800'}`}>
+            <div className={`mb-6 border-b-2 pb-2 flex items-center justify-between ${
+                color === 'teal' ? 'border-teal-600' : 
+                color === 'indigo' ? 'border-indigo-600' : 
+                'border-emerald-600'
+            }`}>
+               <h3 className={`text-2xl font-bold ${
+                color === 'teal' ? 'text-teal-800' : 
+                color === 'indigo' ? 'text-indigo-800' : 
+                'text-emerald-800'
+               }`}>
                  1. Executive Summary & Impact
                </h3>
-               <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">Page 01</span>
+               <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">Analysis 01</span>
             </div>
             <SummaryTab data={currentData} />
           </section>
           
-          {/* HALAMAN 2 */}
-          <section id="viral-dive" className="scroll-mt-20 pt-8 print:pt-4">
-            <div className={`mb-6 border-b-2 pb-2 flex items-center justify-between ${currentCase === 'wardah' ? 'border-teal-600' : 'border-indigo-600'} print:mb-3`}>
-               <h3 className={`text-2xl font-bold ${currentCase === 'wardah' ? 'text-teal-800' : 'text-indigo-800'}`}>
+          <section id="viral-dive" className="scroll-mt-20 pt-8 border-t border-gray-100">
+            <div className={`mb-6 border-b-2 pb-2 flex items-center justify-between ${
+                color === 'teal' ? 'border-teal-600' : 
+                color === 'indigo' ? 'border-indigo-600' : 
+                'border-emerald-600'
+            }`}>
+               <h3 className={`text-2xl font-bold ${
+                color === 'teal' ? 'text-teal-800' : 
+                color === 'indigo' ? 'text-indigo-800' : 
+                'text-emerald-800'
+               }`}>
                  2. Viral Analytics Deep Dive
                </h3>
-               <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">Page 02</span>
+               <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">Analysis 02</span>
             </div>
             <ViralDiveTab data={currentData} />
           </section>
           
-          {/* HALAMAN 3 */}
-          <section id="content-detail" className="scroll-mt-20 pt-8 print:pt-4">
-            <div className={`mb-6 border-b-2 pb-2 flex items-center justify-between ${currentCase === 'wardah' ? 'border-teal-600' : 'border-indigo-600'} print:mb-3`}>
-               <h3 className={`text-2xl font-bold ${currentCase === 'wardah' ? 'text-teal-800' : 'text-indigo-800'}`}>
+          <section id="content-detail" className="scroll-mt-20 pt-8 border-t border-gray-100">
+            <div className={`mb-6 border-b-2 pb-2 flex items-center justify-between ${
+                color === 'teal' ? 'border-teal-600' : 
+                color === 'indigo' ? 'border-indigo-600' : 
+                'border-emerald-600'
+            }`}>
+               <h3 className={`text-2xl font-bold ${
+                color === 'teal' ? 'text-teal-800' : 
+                color === 'indigo' ? 'text-indigo-800' : 
+                'text-emerald-800'
+               }`}>
                  3. Content & UGC Insights
                </h3>
-               <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">Page 03</span>
+               <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">Analysis 03</span>
             </div>
             <ContentDetailTab data={currentData} />
           </section>
@@ -166,7 +219,7 @@ const App: React.FC = () => {
                 onClick={() => scrollToSection(tab.id as TabId)}
                 className={`flex-1 flex flex-col items-center justify-center py-2 px-1 rounded-xl transition-all ${
                   activeTab === tab.id 
-                  ? (currentCase === 'wardah' ? 'bg-teal-600 shadow-teal-100' : 'bg-indigo-600 shadow-indigo-100') + ' text-white shadow-lg' 
+                  ? (color === 'teal' ? 'bg-teal-600' : color === 'indigo' ? 'bg-indigo-600' : 'bg-emerald-600') + ' text-white shadow-lg' 
                   : 'text-gray-500 hover:bg-gray-100 hover:text-gray-900'
                 }`}
               >
