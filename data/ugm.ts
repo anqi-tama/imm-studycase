@@ -35,12 +35,18 @@ export const UGM_DATA: CaseStudyData = {
     { emoji: '🔍', title: '"Logo Lonjong" Thread', stats: 'X: 70K+ Views | Forensic Drama' }
   ],
   timelineData: [
-    { date: 'Nov 1', mentions: 1500 },
-    { date: 'Nov 10', mentions: 2500 },
-    { date: 'Nov 17', mentions: 8500 }, // KIP Sidang wave
-    { date: 'Nov 23', mentions: 12000 }, // Logo Scan wave
-    { date: 'Nov 28', mentions: 18000 }, // Rektor Clarification wave
-    { date: 'Nov 30', mentions: 15000 },
+    { date: 'Nov 03', mentions: 7 },
+    { date: 'Nov 05', mentions: 10 },
+    { date: 'Nov 07', mentions: 17 },
+    { date: 'Nov 09', mentions: 7 },
+    { date: 'Nov 11', mentions: 2 },
+    { date: 'Nov 13', mentions: 15 },
+    { date: 'Nov 15', mentions: 15 },
+    { date: 'Nov 17', mentions: 1 },
+  ],
+  waves: [
+    { label: 'Wave 1: Sidang KIP / Hoax (Nov 17)', color: 'red' },
+    { label: 'Wave 2: Rektor Clarification (Nov 28)', color: 'blue' }
   ],
   sovData: [
     { name: 'X (Twitter)', value: 62, color: '#1f2937' },
